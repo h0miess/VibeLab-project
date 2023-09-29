@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+commit_regex='(JP2-[0-9]+:|merge)'
+error_msg="Aborting commit. Your commit message is missing either a JIRA 
+Issue ('JP2-XXX') or 'Merge'"
+
+if ! grep -iqE "$commit_regex" "$1"; then
+    echo "$error_msg" >&2
+    exit 1
+fi
+
+LC_ALL=C
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+valid_branch_regex="^(feature|bugfix|improvement|library|prerelease|release|hotfix)\/JP2-[0-9]+$"
+
+message="There is something wrong with your branch name. Branch names in 
+this project must adhere to this contract: $valid_branch_regex. Your 
+commit will be rejected. You should rename your branch to a valid name and 
+try again."
+
+if [[ ! $local_branch =~ $valid_branch_regex ]]
+then
+    echo "$message"
+    exit 1
+fi
+
+exit 0

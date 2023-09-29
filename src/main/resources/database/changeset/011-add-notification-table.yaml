@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 011-add-notification-table
+      author: Egor
+      changes:
+        - sqlFile:
+            encoding: UTF-8
+            path: classpath:database/initNotificationTable.sql
+            stripComments: false

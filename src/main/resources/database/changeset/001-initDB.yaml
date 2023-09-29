@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-init-db
+      author: Egor
+      changes:
+        - sqlFile:
+            encoding: UTF-8
+            path: classpath:database/initDB.sql
+            stripComments: false

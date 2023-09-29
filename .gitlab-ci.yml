@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - docker rm --force jira_project2_back || true
+    - docker-compose up --build -d jira_project2_back
+  only:
+    refs:
+      - dev

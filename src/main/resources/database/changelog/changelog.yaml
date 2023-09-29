@@ -1,0 +1,167 @@
+databaseChangeLog:
+  - include:
+      file: database/changeset/001-initDB.yaml
+
+  - changeSet:
+      id: 002-add-fields-for-tracking-time
+      author: Egor
+      changes:
+        - addColumn:
+            tableName: task
+            columns:
+              - column:
+                  name: estimated_time
+                  type: bigint
+                  constraints:
+                    - nullable: true
+              - column:
+                  name: spent_time
+                  type: bigint
+                  constraints:
+                    - nullable: true
+
+  - changeSet:
+      id: 003-add-enabled-column-for-user
+      author: Egor
+      changes:
+        - addColumn:
+            tableName: usr
+            columns:
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValue: false
+
+  - changeSet:
+      id: 004-add-userId-column-to-token
+      author: Egor
+      changes:
+        - addColumn:
+            tableName: verify_token
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    - nullable: false
+
+  - changeSet:
+      id: 005-insert-test-account
+      author: Egor
+      changes:
+        - insert:
+            tableName: usr
+            columns:
+              - column:
+                  name: email
+                  value: 'test@test.com'
+              - column:
+                 name: password
+                 value: '$2a$10$U.byiQrBV52YN6gSCvV5SueRiseWMwRyxzwJj7VlyECI2WFrSWtnC'
+              - column:
+                  name: name
+                  value: 'test'
+              - column:
+                  name: surname
+                  value: 'test'
+              - column:
+                  name: position
+                  value: 'Frontend developer'
+              - column:
+                  name: profile_picture
+                  value: 'here will be url to picture'
+              - column:
+                  name: enabled
+                  value: true
+
+  - include:
+      file: database/changeset/006-insert-more-test-accounts.yaml
+
+  - changeSet:
+      id: 007-create-table-picture
+      author: Andrey
+      changes:
+        - createTable:
+            tableName: picture
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: link
+                  type: varchar
+                  constraints:
+                    - nullable: false
+                    - unique: true
+              - column:
+                  name: added_date
+                  type: timestamp(6)
+                  constraints:
+                    - nullable: false
+
+  - changeSet:
+      id: 008-change-columns
+      author: Andrey
+      changes:
+        - addColumn:
+            tableName: usr
+            columns:
+              - column:
+                  name: picture_id
+                  type: bigint
+        - addColumn:
+            tableName: board
+            columns:
+              - column:
+                  name: picture_id
+                  type: bigint
+        - dropColumn:
+            tableName: usr
+            columnName: profile_picture
+        - dropColumn:
+            tableName: board
+            columnName: picture
+
+  - changeSet:
+      id: 009-add-foreign-keys
+      author: Andrey
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: picture_id
+            baseTableName: usr
+            referencedColumnNames: id
+            referencedTableName: picture
+            constraintName: fk_user_pictureId
+        - addForeignKeyConstraint:
+            baseColumnNames: picture_id
+            baseTableName: board
+            referencedColumnNames: id
+            referencedTableName: picture
+            constraintName:  fk_board_pictureId
+
+  - changeSet:
+      id: 010-drop-notification-table
+      author: Egor
+      changes:
+        - dropTable:
+            tableName: notification_table
+            columnName: type
+
+  - include:
+      file: database/changeset/011-add-notification-table.yaml
+
+  - changeSet:
+      id: 012-add-unique-constraint
+      author: Egor
+      changes:
+        - addUniqueConstraint:
+            tableName: board_to_users
+            columnNames: board_id, user_id
+            constraintName: board_to_users_boardId_userId_cons
+
+
+

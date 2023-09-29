@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-insert-test-account
+      author: Egor
+      changes:
+        - insert:
+            tableName: usr
+            columns:
+              - column:
+                  name: email
+                  value: 'test1@test.com'
+              - column:
+                  name: password
+                  value: '$2a$10$U.byiQrBV52YN6gSCvV5SueRiseWMwRyxzwJj7VlyECI2WFrSWtnC'
+              - column:
+                  name: name
+                  value: 'test1'
+              - column:
+                  name: surname
+                  value: 'test1'
+              - column:
+                  name: position
+                  value: 'Backend developer'
+              - column:
+                  name: profile_picture
+                  value: 'here will be url to picture'
+              - column:
+                  name: enabled
+                  value: true
+        - insert:
+            tableName: usr
+            columns:
+              - column:
+                  name: email
+                  value: 'test2@test.com'
+              - column:
+                  name: password
+                  value: '$2a$10$U.byiQrBV52YN6gSCvV5SueRiseWMwRyxzwJj7VlyECI2WFrSWtnC'
+              - column:
+                  name: name
+                  value: 'test2'
+              - column:
+                  name: surname
+                  value: 'test2'
+              - column:
+                  name: position
+                  value: 'DevOps'
+              - column:
+                  name: profile_picture
+                  value: 'here will be url to picture'
+              - column:
+                  name: enabled
+                  value: true
+        - insert:
+            tableName: usr
+            columns:
+              - column:
+                  name: email
+                  value: 'test3@test.com'
+              - column:
+                  name: password
+                  value: '$2a$10$U.byiQrBV52YN6gSCvV5SueRiseWMwRyxzwJj7VlyECI2WFrSWtnC'
+              - column:
+                  name: name
+                  value: 'test3'
+              - column:
+                  name: surname
+                  value: 'test3'
+              - column:
+                  name: position
+                  value: 'Mobile developer'
+              - column:
+                  name: profile_picture
+                  value: 'here will be url to picture'
+              - column:
+                  name: enabled
+                  value: true
+        - insert:
+            tableName: usr
+            columns:
+              - column:
+                  name: email
+                  value: 'test4@test.com'
+              - column:
+                  name: password
+                  value: '$2a$10$U.byiQrBV52YN6gSCvV5SueRiseWMwRyxzwJj7VlyECI2WFrSWtnC'
+              - column:
+                  name: name
+                  value: 'test4'
+              - column:
+                  name: surname
+                  value: 'test4'
+              - column:
+                  name: position
+                  value: 'QA'
+              - column:
+                  name: profile_picture
+                  value: 'here will be url to picture'
+              - column:
+                  name: enabled
+                  value: true
